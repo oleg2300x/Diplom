@@ -30,7 +30,7 @@ def cart_add(request, labtest_id):
     except CartItem.DoesNotExist:
         CartItem.objects.create(cart=cart, labtest=labtest, price=labtest.price)
 
-    return redirect('main:labtest_list')
+    return redirect('medical:labtest_list')
 
 
 @login_required()
