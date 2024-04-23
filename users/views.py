@@ -1,13 +1,10 @@
-import random
-import string
+from random import random
 
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
-
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from config.settings import EMAIL_HOST_USER
@@ -29,11 +26,6 @@ class RegisterView(CreateView):
     form_class = UserRegisterForm
     success_url = reverse_lazy('users:login')
     template_name = 'users/register.html'
-
-    #def form_valid(self, form):
-    #    self.object = form.save()
-    #    self.object.save()
-    #    return super().form_valid(form)
 
 
 class ProfileView(UpdateView):
@@ -79,15 +71,3 @@ def generate_password(request):
             return render(request, 'users/forgot_password.html', context)
     else:
         return render(request, 'users/forgot_password.html')
-
-
-    # new_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(8))
-    # request.user.set_password(new_password)
-    # request.user.save()
-    # send_mail(
-    #     subject='Смена пароля',
-    #     message=f'Ваш новый пароль: {new_password}',
-    #     from_email=settings.EMAIL_HOST_USER,
-    #     recipient_list=[request.user.email],
-    # )
-    # return redirect(reverse_lazy('users:login'))

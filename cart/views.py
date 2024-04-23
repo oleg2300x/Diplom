@@ -1,15 +1,16 @@
 from decimal import Decimal
+
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+
+from cart.models import Cart, CartItem
 from medical.models import LabTest
-from .cart import Cart
-from .models import Cart, CartItem
 
 
 @login_required()
 def view_cart(request):
-    #cart = request.user.cart
+    # cart = request.user.cart
     cart = Cart.objects.all().filter(user=request.user).last()
     if not cart:
         cart = Cart.objects.create(user=request.user)
@@ -41,8 +42,6 @@ def increase_cart_item(request, labtest_id):
 
     cart_item.quantity += 1
     cart_item.total = cart_item.price * cart_item.quantity
-
-
     cart_item.save()
 
     return redirect('cart:view_cart')
@@ -57,7 +56,6 @@ def decrease_cart_item(request, labtest_id):
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
         cart_item.total = cart_item.price * cart_item.quantity
-
 
         cart_item.save()
     else:

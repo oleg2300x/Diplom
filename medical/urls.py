@@ -1,12 +1,11 @@
 from django.urls import path
 from medical.apps import MedicalConfig
-from medical.views import (LabTestListView, LabTestDetailView,
-                        LabTestCreateView, LabTestUpdateView, IndexView,
-                        DoctorListView, DoctorDetailView, DoctorCreateView,
-                        DoctorUpdateView, contacts, LabTestDeleteView,
-                        DoctorDeleteView, BookingCreateView)
+from medical.views import IndexView, contacts, LabTestListView, LabTestDetailView, LabTestCreateView, LabTestUpdateView, \
+    LabTestDeleteView, DoctorDetailView, DoctorListView, DoctorCreateView, DoctorUpdateView, DoctorDeleteView, \
+    BookingCreateView
 
 app_name = MedicalConfig.name
+
 
 urlpatterns = [
 
